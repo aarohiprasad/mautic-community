@@ -128,11 +128,17 @@ class Page extends FormEntity implements TranslationEntityInterface, VariantEnti
      */
     private $sessionId;
 
+    /**
+     * @var PageDraft|null
+     */
+    private $draft;
+
     public function __clone()
     {
         $this->id = null;
         $this->clearTranslations();
         $this->clearVariants();
+        $this->setDraft(null);
 
         parent::__clone();
     }
@@ -219,6 +225,12 @@ class Page extends FormEntity implements TranslationEntityInterface, VariantEnti
         $builder->createField('noIndex', 'boolean')
             ->columnName('no_index')
             ->nullable()
+            ->build();
+
+        $builder->createOneToOne('draft', PageDraft::class)
+            ->mappedBy('page')
+            ->fetchExtraLazy()
+            ->cascadeAll()
             ->build();
 
         self::addTranslationMetadata($builder, self::class);
@@ -644,7 +656,7 @@ class Page extends FormEntity implements TranslationEntityInterface, VariantEnti
     /**
      * Get category.
      *
-     * @return Category
+     * @return \Mautic\CategoryBundle\Entity\Category
      */
     public function getCategory()
     {
@@ -812,5 +824,25 @@ class Page extends FormEntity implements TranslationEntityInterface, VariantEnti
     public function setCustomHtml($customHtml): void
     {
         $this->customHtml = $customHtml;
+    }
+
+    public function hasDraft(): bool
+    {
+        return !is_null($this->getDraft());
+    }
+
+    public function getDraftContent(): ?string
+    {
+        return $this->hasDraft() ? $this->getDraft()->getHtml() : null;
+    }
+
+    public function getDraft(): ?PageDraft
+    {
+        return $this->draft;
+    }
+
+    public function setDraft(?PageDraft $draft): void
+    {
+        $this->draft = $draft;
     }
 }
