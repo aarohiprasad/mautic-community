@@ -5,16 +5,11 @@ namespace Mautic\PageBundle\EventListener;
 use Mautic\CoreBundle\Helper\IpLookupHelper;
 use Mautic\CoreBundle\Model\AuditLogModel;
 use Mautic\CoreBundle\Twig\Helper\AssetsHelper;
-use Mautic\LeadBundle\Entity\LeadRepository;
-use Mautic\PageBundle\Entity\HitRepository;
 use Mautic\PageBundle\Entity\Page;
-use Mautic\PageBundle\Entity\PageRepository;
-use Mautic\PageBundle\Entity\RedirectRepository;
 use Mautic\PageBundle\Event as Events;
 use Mautic\PageBundle\Event\PageEditSubmitEvent;
 use Mautic\PageBundle\Event\PageEvent;
 use Mautic\PageBundle\Model\PageDraftModel;
-use Mautic\PageBundle\Model\PageModel;
 use Mautic\PageBundle\PageEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -25,7 +20,7 @@ class PageSubscriber implements EventSubscriberInterface
         private AssetsHelper $assetsHelper,
         private IpLookupHelper $ipLookupHelper,
         private AuditLogModel $auditLogModel,
-        private PageDraftModel $pageDraftModel
+        private PageDraftModel $pageDraftModel,
     ) {
     }
 
