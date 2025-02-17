@@ -107,11 +107,6 @@ EOF
             $assetsHelperMock,
             $ipLookupHelperMock,
             $auditLogModelMock,
-            $auditLogModelMock,
-            $hitRepository,
-            $pageRepository,
-            $redirectRepository,
-            $contactRepository,
             $pageDraftModel
         );
     }
