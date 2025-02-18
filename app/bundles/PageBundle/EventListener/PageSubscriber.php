@@ -10,6 +10,7 @@ use Mautic\PageBundle\Event as Events;
 use Mautic\PageBundle\Event\PageEditSubmitEvent;
 use Mautic\PageBundle\Event\PageEvent;
 use Mautic\PageBundle\Model\PageDraftModel;
+use Mautic\PageBundle\Model\PageModel;
 use Mautic\PageBundle\PageEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -20,6 +21,7 @@ class PageSubscriber implements EventSubscriberInterface
         private AssetsHelper $assetsHelper,
         private IpLookupHelper $ipLookupHelper,
         private AuditLogModel $auditLogModel,
+        private PageModel $pageModel,
         private PageDraftModel $pageDraftModel,
     ) {
     }
