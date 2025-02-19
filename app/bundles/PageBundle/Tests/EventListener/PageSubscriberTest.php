@@ -16,6 +16,7 @@ use Mautic\PageBundle\Event\PageBuilderEvent;
 use Mautic\PageBundle\Event\PageDisplayEvent;
 use Mautic\PageBundle\EventListener\PageSubscriber;
 use Mautic\PageBundle\Model\PageDraftModel;
+use Mautic\PageBundle\Model\PageModel;
 use Mautic\PageBundle\PageEvents;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -91,6 +92,7 @@ EOF
         $contactRepository  = $this->createMock(LeadRepository::class);
         $hitMock            = $this->createMock(Hit::class);
         $leadMock           = $this->createMock(Lead::class);
+        $pageModel          = $this->createMock(PageModel::class);
         $pageDraftModel     = $this->createMock(PageDraftModel::class);
 
         $assetsHelperMock->addScriptDeclaration("const foo='bar';", 'onPageDisplay_bodyOpen');
@@ -107,6 +109,7 @@ EOF
             $assetsHelperMock,
             $ipLookupHelperMock,
             $auditLogModelMock,
+            $pageModel,
             $pageDraftModel
         );
     }
