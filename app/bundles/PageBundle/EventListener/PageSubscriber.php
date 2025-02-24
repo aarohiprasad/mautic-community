@@ -3,6 +3,7 @@
 namespace Mautic\PageBundle\EventListener;
 
 use Mautic\CoreBundle\Helper\IpLookupHelper;
+use Mautic\CoreBundle\Helper\LanguageHelper;
 use Mautic\CoreBundle\Model\AuditLogModel;
 use Mautic\CoreBundle\Twig\Helper\AssetsHelper;
 use Mautic\PageBundle\Entity\Page;
@@ -21,6 +22,7 @@ class PageSubscriber implements EventSubscriberInterface
         private AssetsHelper $assetsHelper,
         private IpLookupHelper $ipLookupHelper,
         private AuditLogModel $auditLogModel,
+        private LanguageHelper $languageHelper,
         private PageModel $pageModel,
         private PageDraftModel $pageDraftModel,
     ) {
@@ -52,6 +54,9 @@ class PageSubscriber implements EventSubscriberInterface
                 'ipAddress' => $this->ipLookupHelper->getIpAddressFromRequest(),
             ];
             $this->auditLogModel->writeToLog($log);
+        }
+        if (!array_key_exists($page->getLanguage(), $this->languageHelper->getSupportedLanguages())) {
+            $this->languageHelper->extractLanguagePackage($page->getLanguage());
         }
     }
 

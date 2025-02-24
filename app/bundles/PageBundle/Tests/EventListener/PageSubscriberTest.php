@@ -2,8 +2,8 @@
 
 namespace Mautic\PageBundle\Tests\EventListener;
 
-use Mautic\CoreBundle\Helper\CoreParametersHelper;
 use Mautic\CoreBundle\Helper\IpLookupHelper;
+use Mautic\CoreBundle\Helper\LanguageHelper;
 use Mautic\CoreBundle\Model\AuditLogModel;
 use Mautic\CoreBundle\Translation\Translator;
 use Mautic\CoreBundle\Twig\Helper\AssetsHelper;
@@ -82,16 +82,14 @@ EOF
         /** @var Packages&MockObject $packagesMock */
         $packagesMock = $this->createMock(Packages::class);
 
-        /** @var CoreParametersHelper&MockObject $coreParametersHelper */
-        $coreParametersHelper = $this->createMock(CoreParametersHelper::class);
-
-        $assetsHelperMock   = new AssetsHelper($packagesMock, $coreParametersHelper);
-        $ipLookupHelperMock = $this->createMock(IpLookupHelper::class);
-        $auditLogModelMock  = $this->createMock(AuditLogModel::class);
-        $hitRepository      = $this->createMock(HitRepository::class);
-        $contactRepository  = $this->createMock(LeadRepository::class);
-        $hitMock            = $this->createMock(Hit::class);
-        $leadMock           = $this->createMock(Lead::class);
+        $assetsHelperMock     = new AssetsHelper($packagesMock);
+        $ipLookupHelperMock   = $this->createMock(IpLookupHelper::class);
+        $auditLogModelMock    = $this->createMock(AuditLogModel::class);
+        $hitRepository        = $this->createMock(HitRepository::class);
+        $contactRepository    = $this->createMock(LeadRepository::class);
+        $hitMock              = $this->createMock(Hit::class);
+        $leadMock             = $this->createMock(Lead::class);
+        $languageHelper       = $this->createMock(LanguageHelper::class);
         $pageModel          = $this->createMock(PageModel::class);
         $pageDraftModel     = $this->createMock(PageDraftModel::class);
 
@@ -109,6 +107,7 @@ EOF
             $assetsHelperMock,
             $ipLookupHelperMock,
             $auditLogModelMock,
+            $languageHelper,
             $pageModel,
             $pageDraftModel
         );
