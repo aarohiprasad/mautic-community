@@ -90,8 +90,8 @@ EOF
         $hitMock              = $this->createMock(Hit::class);
         $leadMock             = $this->createMock(Lead::class);
         $languageHelper       = $this->createMock(LanguageHelper::class);
-        $pageModel          = $this->createMock(PageModel::class);
-        $pageDraftModel     = $this->createMock(PageDraftModel::class);
+        $pageModel            = $this->createMock(PageModel::class);
+        $pageDraftModel       = $this->createMock(PageDraftModel::class);
 
         $assetsHelperMock->addScriptDeclaration("const foo='bar';", 'onPageDisplay_bodyOpen');
 
