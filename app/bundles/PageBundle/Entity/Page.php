@@ -128,10 +128,7 @@ class Page extends FormEntity implements TranslationEntityInterface, VariantEnti
      */
     private $sessionId;
 
-    /**
-     * @var PageDraft|null
-     */
-    private $draft;
+    private ?PageDraft $draft = null;
 
     public function __clone()
     {
